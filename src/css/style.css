@@ -45,10 +45,11 @@
     --shadow-orange: 0 18px 50px -22px rgba(244,120,32,.4);
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   html, body {
     margin: 0 !important;
     padding: 0 !important;
+    overflow-x: hidden;
   }
   body {
     font-family: 'Outfit', system-ui, sans-serif;
@@ -70,10 +71,11 @@
     font-weight: 600;
   }
   a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; height: auto; }
 }
 
 @layer components {
-  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
   .pad { padding: 96px 0; }
 
   /* ─── EYEBROW ─────────────────────────────────── */
@@ -109,7 +111,6 @@
   .sec-head p { color: var(--muted); font-size: 1.05rem; font-family: 'Outfit', sans-serif; }
 
   /* ─── BUTTONS ─────────────────────────────────── */
-  /* Botones angulares — SIN border-radius (vs gasfitería que usaba 8px) */
   .btn {
     display: inline-flex; align-items: center; gap: .5rem;
     padding: .8rem 1.75rem;
@@ -154,9 +155,7 @@
 
   .btn-large { padding: 1rem 2.2rem; font-size: 1rem; }
 
-  /* ─── HEADER ─────────────────────────────────────
-     Oscuro por defecto — INVERSIÓN vs gasfitería (claro)
-     ────────────────────────────────────────────── */
+  /* ─── HEADER ───────────────────────────────────── */
   header {
     position: sticky; top: 0; z-index: 60;
     background: rgba(13,13,13,.95);
@@ -188,10 +187,7 @@
 
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.8); }
 
-  /* ─── HERO ───────────────────────────────────────
-     Split diagonal: izquierda = contenido sobre rojo; derecha = imagen
-     Radicalmente diferente al hero de gasfitería (fullscreen foto)
-     ────────────────────────────────────────────── */
+  /* ─── HERO ─────────────────────────────────────── */
   .hero-split {
     min-height: 88vh;
     display: grid;
@@ -200,7 +196,6 @@
     overflow: hidden;
   }
 
-  /* Mitad izquierda — fondo rojo sólido */
   .hero-left {
     background: var(--csz-red);
     position: relative;
@@ -209,10 +204,8 @@
     justify-content: center;
     padding: 80px 60px 80px 0;
     z-index: 2;
-    /* Diagonal que corta hacia la derecha */
     clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
   }
-  /* Patrón de puntos sutil */
   .hero-left::before {
     content: "";
     position: absolute; inset: 0;
@@ -228,7 +221,6 @@
     margin-left: auto;
   }
 
-  /* Mitad derecha — imagen fotográfica */
   .hero-right {
     position: relative;
     background: #111;
@@ -245,7 +237,6 @@
     z-index: 1;
   }
 
-  /* Badge en el hero */
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     border: 1px solid rgba(255,255,255,.25);
@@ -284,7 +275,6 @@
     display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px;
   }
 
-  /* Barra de stats debajo de los CTAs */
   .hero-stats {
     display: flex; gap: 0;
     border-top: 1px solid rgba(255,255,255,.15);
@@ -307,7 +297,6 @@
     letter-spacing: .04em; text-transform: uppercase; margin-top: 4px;
   }
 
-  /* Urgencia strip sobre el hero — barra flotante abajo */
   .hero-urgency-strip {
     position: absolute; bottom: 0; left: 0; right: 0;
     background: var(--csz-orange);
@@ -328,32 +317,12 @@
     padding-bottom: 1px;
   }
 
-  @media (max-width: 900px) {
-    .hero-split {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-    .hero-left {
-      clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
-      padding: 70px 24px 90px;
-    }
-    .hero-left-inner { padding-left: 0; max-width: 100%; margin-left: 0; }
-    .hero-right { min-height: 50vw; }
-    .hero-actions { flex-direction: column; }
-    .hero-actions .btn { width: 100%; justify-content: center; }
-    .hero-urgency-strip { flex-direction: column; gap: 8px; padding: 14px 24px; text-align: center; }
-  }
-
-  /* ─── SERVICIOS ─────────────────────────────────
-     Fondo oscuro #0d0d0d + cards con borde luminoso — INVERSIÓN vs gasfitería (blanco)
-     Cards angulares, sin radius
-     ────────────────────────────────────────────── */
+  /* ─── SERVICIOS ─────────────────────────────────── */
   .services-dark {
     background: var(--ink);
     position: relative;
     overflow: hidden;
   }
-  /* Resplandores de fondo */
   .services-dark::before {
     content: ""; position: absolute;
     top: -20%; left: -10%; width: 600px; height: 600px;
@@ -371,7 +340,6 @@
   .services-dark .sec-head p { color: rgba(255,255,255,.55); }
   .services-dark .eyebrow { color: var(--csz-orange); }
 
-  /* Grid de servicios: 3 cols arriba, 2 centrados abajo */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -379,7 +347,6 @@
     position: relative;
   }
 
-  /* Card de servicio — Angular, sin rounded corners */
   .svc-card {
     background: rgba(255,255,255,.03);
     border: 1px solid rgba(255,255,255,.07);
@@ -395,7 +362,6 @@
     background: rgba(244,120,32,.05);
     z-index: 2;
   }
-  /* Acento superior de color que se anima */
   .svc-card::before {
     content: ""; position: absolute;
     top: 0; left: 0; right: 0; height: 3px;
@@ -424,7 +390,6 @@
 
   .svc-card-body { padding: 28px 26px 30px; flex: 1; }
 
-  /* Icono cuadrado sin bordes redondeados */
   .svc-icon {
     width: 50px; height: 50px;
     border-radius: 0;
@@ -454,7 +419,6 @@
     line-height: 1.65;
   }
 
-  /* Variante roja para la primera card (urgencia) */
   .svc-card.svc-urgent::before { background: var(--csz-red); }
   .svc-card.svc-urgent:hover {
     border-color: var(--csz-red);
@@ -468,7 +432,6 @@
   .svc-card.svc-urgent:hover .svc-icon { background: var(--csz-red); color: #fff; }
   .svc-card.svc-urgent:hover h3 { color: var(--csz-red); }
 
-  /* Última fila de 2 cards centrada */
   .services-grid-last {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -476,16 +439,7 @@
     margin-top: 2px;
   }
 
-  @media (max-width: 900px) {
-    .services-grid, .services-grid-last { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 560px) {
-    .services-grid, .services-grid-last { grid-template-columns: 1fr; }
-  }
-
-  /* ─── STATS BANNER ───────────────────────────────
-     Fondo naranja sólido — distinción total vs gasfitería
-     ────────────────────────────────────────────── */
+  /* ─── STATS BANNER ─────────────────────────────── */
   .stats-banner {
     background: var(--csz-orange);
     padding: 64px 0;
@@ -518,17 +472,8 @@
     font-family: 'Outfit', sans-serif; font-weight: 500;
     text-transform: uppercase; letter-spacing: .06em;
   }
-  @media (max-width: 900px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; }
-    .stat-item:nth-child(2) { border-right: none; }
-  }
-  @media (max-width: 560px) {
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-  }
 
-  /* ─── NOSOTROS ───────────────────────────────────
-     Fondo gradiente oscuro-rojo — diferente a gasfitería (blanco)
-     ────────────────────────────────────────────── */
+  /* ─── NOSOTROS ─────────────────────────────────── */
   .nosotros-section {
     background: linear-gradient(135deg, #0d0d0d 0%, #1a0505 60%, #0d0d0d 100%);
     position: relative; overflow: hidden;
@@ -550,7 +495,6 @@
     align-items: center;
   }
 
-  /* Imagen con marco angular y acento */
   .nosotros-img-wrap {
     position: relative;
     border-radius: 0;
@@ -561,7 +505,6 @@
     border: 4px solid var(--csz-red);
     box-shadow: 12px 12px 0 var(--csz-orange);
   }
-  /* Badge flotante sobre la imagen */
   .nosotros-badge {
     position: absolute;
     bottom: -20px; right: -20px;
@@ -595,7 +538,6 @@
     font-size: 1.05rem; line-height: 1.75; margin-bottom: 2rem;
   }
 
-  /* Pilares - lista de razones */
   .pillar-list { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
   .pillar-item {
     display: flex; align-items: flex-start; gap: 16px;
@@ -628,23 +570,11 @@
     line-height: 1.5; margin: 0;
   }
 
-  @media (max-width: 900px) {
-    .nosotros-grid { grid-template-columns: 1fr; gap: 40px; }
-    .nosotros-badge { bottom: -12px; right: -8px; }
-  }
-
-  /* ─── PROCESO ────────────────────────────────────
-     Fondo CLARO (paper) — INVERSIÓN vs gasfitería (oscuro)
-     Timeline vertical con línea de color
-     ────────────────────────────────────────────── */
-  .proceso-section {
-    background: var(--paper);
-  }
+  /* ─── PROCESO ──────────────────────────────────── */
+  .proceso-section { background: var(--paper); }
   .proceso-section .sec-head h2 { color: var(--ink); }
   .proceso-section .sec-head p { color: var(--muted); }
-  .proceso-section .eyebrow { color: var(--csz-red); }
 
-  /* Timeline horizontal en desktop */
   .proceso-timeline {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -652,7 +582,6 @@
     position: relative;
     margin-top: 16px;
   }
-  /* Línea de conexión */
   .proceso-timeline::before {
     content: ""; position: absolute;
     top: 28px; left: 12.5%; right: 12.5%; height: 2px;
@@ -669,7 +598,6 @@
     padding: 0 12px; position: relative;
   }
 
-  /* Número circular — ahora con borde rojo en lugar de fondo oscuro */
   .paso-num {
     width: 56px; height: 56px;
     border-radius: 0;
@@ -697,7 +625,6 @@
   }
   .proceso-step:hover .paso-connector { height: 40px; background: var(--csz-red); }
 
-  /* Body de cada paso */
   .paso-body {
     background: #fff;
     border: 1px solid rgba(227,27,35,.1);
@@ -722,10 +649,7 @@
     color: var(--csz-red); margin: 0 auto 14px;
     transition: all .3s;
   }
-  .proceso-step:hover .paso-icon {
-    background: var(--csz-red); color: #fff;
-    transform: rotate(-6deg);
-  }
+  .proceso-step:hover .paso-icon { background: var(--csz-red); color: #fff; transform: rotate(-6deg); }
 
   .paso-body h3 {
     font-size: 1.1rem; font-weight: 800;
@@ -739,29 +663,13 @@
     color: var(--muted); line-height: 1.65; margin: 0;
   }
 
-  @media (max-width: 900px) {
-    .proceso-timeline { grid-template-columns: 1fr 1fr; gap: 24px; }
-    .proceso-timeline::before { display: none; }
-  }
-  @media (max-width: 560px) {
-    .proceso-timeline { grid-template-columns: 1fr; gap: 16px; }
-    .proceso-step { flex-direction: row; text-align: left; align-items: flex-start; gap: 12px; }
-    .paso-num { width: 46px; height: 46px; font-size: 1.3rem; flex-shrink: 0; }
-    .paso-connector { display: none; }
-    .paso-body { padding: 20px 16px; }
-  }
-
-  /* ─── BANNER URGENCIA ────────────────────────────
-     Franja de imagen + rojo oscuro — conversión
-     ────────────────────────────────────────────── */
+  /* ─── BANNER URGENCIA ──────────────────────────── */
   .urgencia-banner {
     position: relative; overflow: hidden;
     min-height: 360px;
     display: flex; align-items: center;
   }
-  .urgencia-banner-bg {
-    position: absolute; inset: 0; z-index: 0;
-  }
+  .urgencia-banner-bg { position: absolute; inset: 0; z-index: 0; }
   .urgencia-banner-bg img {
     width: 100%; height: 100%; object-fit: cover; object-position: center top;
     filter: brightness(.35) saturate(.8);
@@ -787,9 +695,7 @@
   }
   .urgencia-banner-cta { display: flex; gap: 14px; flex-wrap: wrap; flex-shrink: 0; }
 
-  /* ─── OPINIONES ──────────────────────────────────
-     Fondo NARANJA sólido — INVERSIÓN vs gasfitería (oscuro casi negro)
-     ────────────────────────────────────────────── */
+  /* ─── OPINIONES ────────────────────────────────── */
   .testi-section {
     background: var(--csz-orange);
     position: relative; overflow: hidden;
@@ -797,8 +703,7 @@
   .testi-section::before {
     content: ""; position: absolute; inset: 0;
     background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
+    background-size: 28px 28px; pointer-events: none;
   }
   .testi-section .wrap { position: relative; z-index: 1; }
   .testi-section .sec-head h2 { color: #fff; }
@@ -807,7 +712,6 @@
 
   .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-  /* Card de testimonio — clara sobre fondo naranja */
   .testi-card {
     background: rgba(255,255,255,.12);
     border: 1px solid rgba(255,255,255,.2);
@@ -824,8 +728,7 @@
   .testi-card .stars { color: var(--csz-yellow); letter-spacing: 3px; font-size: .95rem; margin-bottom: 16px; }
   .testi-card p {
     font-size: .97rem; line-height: 1.7; color: rgba(255,255,255,.95);
-    font-family: 'Outfit', sans-serif; font-weight: 300;
-    font-style: italic;
+    font-family: 'Outfit', sans-serif; font-weight: 300; font-style: italic;
   }
   .testi-card .who { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
   .testi-card .av {
@@ -839,11 +742,7 @@
   .testi-card .who b { font-size: .92rem; color: #fff; display: block; font-family: 'Outfit', sans-serif; font-weight: 700; }
   .testi-card .who span { font-size: .78rem; color: rgba(255,255,255,.7); font-family: 'Outfit', sans-serif; }
 
-  @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
-
-  /* ─── WHATSAPP SECTION ───────────────────────────
-     Fondo claro (paper/blanco) — INVERSIÓN vs gasfitería (oscuro)
-     ────────────────────────────────────────────── */
+  /* ─── WHATSAPP SECTION ─────────────────────────── */
   .wa-section {
     background: #fff;
     position: relative; overflow: hidden;
@@ -899,7 +798,6 @@
   }
   .wa-btn:hover { background: #22c55e; transform: translateY(-3px); }
 
-  /* Panel derecho de WhatsApp */
   .wa-panel {
     background: var(--ink);
     border: 1px solid rgba(37,211,102,.15);
@@ -945,14 +843,7 @@
     50% { opacity: .6; transform: scale(.85); }
   }
 
-  @media (max-width: 900px) {
-    .wa-inner { grid-template-columns: 1fr; gap: 40px; }
-    .wa-panel { padding: 24px 20px; }
-  }
-
-  /* ─── CONTACTO ───────────────────────────────────
-     Split: mitad izquierda roja, mitad derecha oscura con formulario
-     ────────────────────────────────────────────── */
+  /* ─── CONTACTO ─────────────────────────────────── */
   .contacto-section { background: var(--ink); }
   .contacto-section .sec-head h2 { color: #fff; }
   .contacto-section .sec-head p { color: rgba(255,255,255,.6); }
@@ -1012,7 +903,6 @@
     font-family: 'Outfit', sans-serif; margin: 4px 0 0 0;
   }
 
-  /* ── Formulario ── */
   .form-space { display: flex; flex-direction: column; gap: 14px; }
   .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-field { display: flex; flex-direction: column; gap: 8px; }
@@ -1044,14 +934,7 @@
   .form-field textarea::placeholder { color: rgba(255,255,255,.28); }
   .form-field textarea { resize: none; }
 
-  @media (max-width: 900px) {
-    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .form-grid-2 { grid-template-columns: 1fr; }
-  }
-
-  /* ─── FOOTER ─────────────────────────────────────
-     Fondo naranja — INVERSIÓN total vs gasfitería (ink/negro)
-     ────────────────────────────────────────────── */
+  /* ─── FOOTER ───────────────────────────────────── */
   footer {
     background: var(--csz-orange);
     color: rgba(255,255,255,.9);
@@ -1101,13 +984,6 @@
     font-family: 'Outfit', sans-serif;
   }
 
-  @media (max-width: 900px) {
-    .foot-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 560px) {
-    .foot-grid { grid-template-columns: 1fr; }
-  }
-
   /* ─── WHATSAPP FLOAT ─────────────────────────── */
   .wa-float {
     position: fixed; bottom: 26px; right: 26px; z-index: 80;
@@ -1133,32 +1009,213 @@
   .reveal.in { opacity: 1; transform: none; }
 }
 
-/* ─── Global Responsive ──────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   📱 RESPONSIVE — TABLET (< 1024px)
+   Solo ajustes menores. Desktop se mantiene idéntico.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-left {
+    padding: 60px 40px 100px 0;
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  }
+  .hero-left-inner { padding-left: 40px; max-width: 480px; }
+
+  .nosotros-grid { gap: 40px; }
+  .nosotros-badge { bottom: -12px; right: -12px; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   📱 RESPONSIVE — TABLET PORTRAIT (< 900px)
+   ══════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .pad { padding: 80px 0; }
+  .pad { padding: 72px 0; }
+
+  /* Header */
   .navlinks {
     position: fixed; inset: 76px 0 auto 0;
-    background: rgba(13,13,13,.98);
+    background: rgba(13,13,13,.97);
     backdrop-filter: blur(14px);
     flex-direction: column;
-    padding: 24px; gap: 18px;
-    border-bottom: 1px solid rgba(227,27,35,.2);
+    padding: 28px 24px; gap: 18px;
+    border-bottom: 2px solid var(--csz-red);
     transform: translateY(-120%);
-    transition: transform .3s, visibility .3s;
+    transition: transform .3s ease, visibility .3s;
     visibility: hidden; pointer-events: none;
     z-index: 59;
   }
-  .navlinks.open { transform: none; visibility: visible; pointer-events: auto; }
-  .navlinks .btn { align-self: center; }
-  .menu-toggle { display: block; }
+  .navlinks.open { transform: translateY(0); visibility: visible; pointer-events: auto; }
+  .navlinks a:not(.btn) { font-size: 1rem; }
+  .navlinks .btn { align-self: stretch; text-align: center; justify-content: center; }
+  .menu-toggle { display: flex; align-items: center; justify-content: center; }
+
+  /* Hero — 1 columna, sin clip-path, imagen con degradado suave hacia abajo */
+  .hero-split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero-left {
+    clip-path: none;
+    padding: 20px 32px 64px; /* Padding lateral restaurado */
+    min-height: auto;
+  }
+  .hero-left-inner {
+    padding-left: 0;
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .hero-right {
+    min-height: 380px;
+    order: -1; /* Foto arriba */
+  }
+  .hero-right-overlay {
+    /* Degradado hacia abajo (rojo CSZ) para empalmar con .hero-left */
+    background: linear-gradient(180deg, rgba(227,27,35,0) 40%, rgba(227,27,35,1) 100%);
+  }
+  .hero-split h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+  .hero-actions { flex-wrap: wrap; }
+  .hero-actions .btn { flex: 1 1 auto; justify-content: center; min-width: 180px; }
+  .hero-stats { flex-wrap: wrap; gap: 16px; }
+  .hero-stat {
+    border-right: none; padding-right: 0; margin-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    padding-bottom: 12px; width: calc(50% - 8px);
+  }
+  .hero-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.12); padding-right: 16px; }
+  .hero-stat:last-child { border-bottom: none; border-right: none; }
+  .hero-urgency-strip {
+    position: relative;
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  /* Servicios */
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .services-grid-last { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 32px 0; }
+  .stat-item:nth-child(2) { border-right: none; }
+  .stat-item:nth-child(3) { border-right: 1px solid rgba(255,255,255,.2); }
+
+  /* Nosotros */
+  .nosotros-grid { grid-template-columns: 1fr; gap: 60px; }
+  .nosotros-img-wrap { max-width: 480px; margin: 0 auto; }
+  .nosotros-badge { bottom: -16px; right: 0; }
+
+  /* Proceso */
+  .proceso-timeline { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .proceso-timeline::before { display: none; }
+
+  /* Urgencia banner */
+  .urgencia-banner .wrap { flex-direction: column; }
+  .urgencia-banner-cta { flex-wrap: wrap; }
+  .urgencia-banner-cta .btn { flex: 1; justify-content: center; min-width: 160px; }
+
+  /* Testimonios */
+  .testi-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* WhatsApp */
+  .wa-inner { grid-template-columns: 1fr; gap: 40px; }
+  .wa-btn { width: 100%; justify-content: center; }
+  .wa-panel { padding: 24px 20px; }
+
+  /* Contacto */
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cta-strip { flex-wrap: wrap; }
+  .cta-strip .btn { flex: 1; justify-content: center; }
+
+  /* Footer */
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .foot-grid > *:first-child { grid-column: 1 / -1; }
+  .foot-bottom { flex-direction: column; text-align: center; }
 }
 
-@media (max-width: 560px) {
-  .pad { padding: 64px 0; }
-  .cta-strip { flex-direction: column; align-items: flex-start; }
+/* ══════════════════════════════════════════════════════════════
+   📱 RESPONSIVE — MOBILE (< 600px)
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .wrap { padding: 0 16px; }
+  .pad { padding: 56px 0; }
+  .sec-head { margin-bottom: 36px; }
+  .sec-head h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+
+  /* Header */
+  .nav { height: 66px; }
+  .brand img { height: 38px; }
+
+  /* Hero */
+  .hero-right { min-height: 300px; max-height: 350px; }
+  .hero-left { padding: 10px 20px 56px; } /* Padding lateral en mobile pequeño */
+  .hero-split h1 { font-size: clamp(2.2rem, 9vw, 2.8rem); margin-bottom: 16px; }
+  .hero-split p { font-size: 1rem; margin-bottom: 28px; }
+  .hero-badge { font-size: .7rem; padding: 6px 14px; margin-bottom: 20px; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border-top: 1px solid rgba(255,255,255,.15);
+    padding-top: 20px; flex-wrap: nowrap;
+  }
+  .hero-stat {
+    border-bottom: none; width: auto;
+    border-right: 1px solid rgba(255,255,255,.12) !important;
+    padding-right: 0 !important; margin-right: 0 !important;
+    padding: 0 10px;
+    text-align: center;
+  }
+  .hero-stat:last-child { border-right: none !important; }
+  .hero-stat-num { font-size: 1.8rem; }
+  .hero-stat-label { font-size: .65rem; }
+
+  /* Servicios — 1 columna */
+  .services-grid { grid-template-columns: 1fr; gap: 12px; }
+  .services-grid-last { grid-template-columns: 1fr; gap: 12px; margin-top: 12px; }
+
+  /* Stats banner */
+  .stats-banner { padding: 40px 0; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px 0; }
+  .stat-item:nth-child(3) { border-right: none; }
+  .stat-num { font-size: 2.8rem; }
+
+  /* Nosotros */
+  .nosotros-img-wrap { max-width: 100%; }
+  .nosotros-img-wrap img { box-shadow: 8px 8px 0 var(--csz-orange); }
+  .nosotros-badge { right: 0; bottom: -14px; padding: 14px 18px; }
+  .nosotros-badge strong { font-size: 2rem; }
+
+  /* Proceso */
+  .proceso-timeline { grid-template-columns: 1fr; gap: 12px; }
+  .proceso-step { flex-direction: row; text-align: left; gap: 12px; align-items: flex-start; }
+  .paso-num { width: 44px; height: 44px; font-size: 1.3rem; flex-shrink: 0; }
+  .paso-connector { display: none; }
+  .paso-body { padding: 20px 16px; }
+  .paso-body h3 { font-size: 1rem; }
+
+  /* Urgencia banner */
+  .urgencia-banner { min-height: auto; padding: 48px 0; }
+  .urgencia-banner-cta { flex-direction: column; width: 100%; }
+  .urgencia-banner-cta .btn { width: 100%; justify-content: center; }
+
+  /* WA panel simplificado en mobile */
+  .wa-panel { padding: 20px 16px; gap: 14px; }
+  .wa-item { padding: 12px 14px; gap: 10px; }
+
+  /* Formulario */
+  .form-grid-2 { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+  .foot-grid > *:first-child { grid-column: auto; }
+
+  /* Botón float más pequeño en mobile */
+  .wa-float { width: 52px; height: 52px; bottom: 18px; right: 18px; }
+  .wa-float svg { width: 28px; height: 28px; }
 }
 
+/* Accesibilidad: sin animaciones si el usuario lo prefiere */
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
 }
