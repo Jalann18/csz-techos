@@ -836,7 +836,11 @@
             <h2 style="color:#fff;font-size:clamp(1.5rem,2.8vw,2rem);margin:.5rem 0 .5rem;">Cuéntanos sobre tu Techo</h2>
             <p style="color:rgba(255,255,255,.5);font-size:.93rem;margin:0 0 28px;font-family:'Outfit',sans-serif;">Te respondemos en menos de 15 minutos durante el horario de atención.</p>
 
-            <form name="cotizacion-csz-techumbres" method="POST" data-netlify="true" class="form-space" aria-label="Formulario de cotización CSZ Techumbres">
+            <form name="cotizacion-csz-techumbres" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-space" aria-label="Formulario de cotización CSZ Techumbres">
+              <input type="hidden" name="form-name" value="cotizacion-csz-techumbres" />
+              <div hidden>
+                <label>No llenar: <input name="bot-field" /></label>
+              </div>
               <input type="hidden" name="subject" value="🏠 Nueva Solicitud de Cotización - CSZ Techumbres" />
               <div class="form-grid-2">
                 <div class="form-field">
