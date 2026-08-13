@@ -1,5 +1,5 @@
 /**
- * main.js — Punto de entrada principal — CSZ Techos
+ * main.js — Punto de entrada principal — CSZ Techumbres
  */
 
 import '../css/style.css';
@@ -7,18 +7,18 @@ import { initNavigation } from './navigation.js';
 import { initAnimations } from './animations.js';
 
 /* ════════════════════════════════════════════════════════════════
-   ⚙️  CONFIGURACIÓN GLOBAL DE CONTACTO — CSZ Techos
+   ⚙️  CONFIGURACIÓN GLOBAL DE CONTACTO — CSZ Techumbres
    ════════════════════════════════════════════════════════════════ */
 const CONFIG = {
   // WhatsApp en formato internacional, SOLO números (sin +, sin espacios)
   whatsapp: "56940651240",
   // Mensaje que aparece escrito al abrir WhatsApp
-  whatsappMensaje: "Hola CSZ Techos, necesito una inspección/reparación de techo urgente",
+  whatsappMensaje: "Hola CSZ Techumbres, necesito una inspección/reparación de techo urgente",
   // Teléfono para mostrar y para llamar
   telefonoMostrar: "+56 9 4065 1240",
   telefonoLlamar:  "56940651240",
   // Correo de contacto
-  correo: "cszreparaciones@gmail.com",
+  correo: "Solucioneszurita@gmail.com",
   // Redes sociales (pega el enlace completo; deja "" para ocultar el ícono)
   instagram: "",
   facebook:  "",
@@ -82,5 +82,5 @@ document.addEventListener('DOMContentLoaded', () => {
   aplicarConfig();
   initNavigation();
   initAnimations();
-  console.log('%c🏠 CSZ Techos — Dev Mode', 'color: #E31B23; font-weight: bold; font-size: 14px;');
+  console.log('%c🏠 CSZ Techumbres — Dev Mode', 'color: #E31B23; font-weight: bold; font-size: 14px;');
 });
